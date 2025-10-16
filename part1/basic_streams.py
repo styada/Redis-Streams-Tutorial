@@ -13,8 +13,17 @@ entries = r.xrange(stream_name, '-', '+')
 for entry_id, fields in entries:
     print(f"ID: {entry_id}, Fields: {fields}")
 
+r.xadd(stream_name, {'field1': 'value5', 'field2': 'value6'})
+r.xadd(stream_name, {'field1': 'value7', 'field2': 'value8'})
+
+
 # Read from the stream starting from a specific ID
 new_entries = r.xread({stream_name: '0-0'}, count=10)
 for stream, messages in new_entries:
     for message_id, message_data in messages:
         print(f"Stream: {stream}, ID: {message_id}, Data: {message_data}")
+        
+r.
+
+# Clean up the stream
+r.flushall()
